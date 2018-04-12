@@ -1,0 +1,21 @@
+---
+stages:
+  - build
+
+buster:
+  variables:
+    DEB_SUITE: buster
+  script:
+    - >-
+      docker build
+      --build-arg=DEB_SUITE=${DEB_SUITE}
+      --force-rm=true
+      --label=org.label-schema.build-date="$(date --utc --iso-8601=seconds)"
+      --label=org.label-schema.vcs-ref="${CI_COMMIT_SHA}"
+      --label=org.label-schema.vcs-url="${CI_REPOSITORY_URL}"
+      --pull=true
+      -t quay.io/${CI_REGISTRY_IMAGE}:${DEB_SUITE}
+      .
+    - docker push quay.io/${CI_REGISTRY_IMAGE}:${DEB_SUITE}
+
+# vim: ai ts=2 sw=2 et sts=2 ft=yaml
