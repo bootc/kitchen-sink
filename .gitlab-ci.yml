@@ -3,19 +3,23 @@ stages:
   - build
 
 buster:
+  stage: build
   variables:
     DEB_SUITE: buster
   script:
+    - docker login -u="${QUAY_IO_USER}" -p="${QUAY_IO_PASSWORD}" quay.io
     - >-
       docker build
       --build-arg=DEB_SUITE=${DEB_SUITE}
       --force-rm=true
       --label=org.label-schema.build-date="$(date --utc --iso-8601=seconds)"
       --label=org.label-schema.vcs-ref="${CI_COMMIT_SHA}"
-      --label=org.label-schema.vcs-url="${CI_REPOSITORY_URL}"
+      --label=org.label-schema.vcs-url="${CI_PROJECT_URL}.git"
       --pull=true
-      -t quay.io/${CI_REGISTRY_IMAGE}:${DEB_SUITE}
+      -t quay.io/${CI_PROJECT_PATH}:${DEB_SUITE}
       .
-    - docker push quay.io/${CI_REGISTRY_IMAGE}:${DEB_SUITE}
+    - docker push quay.io/${CI_PROJECT_PATH}:${DEB_SUITE}
+  tags:
+    - docker-build
 
 # vim: ai ts=2 sw=2 et sts=2 ft=yaml
