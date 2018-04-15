@@ -15,9 +15,12 @@ RUN set -eux; apt-get update; apt-get install -y --no-install-recommends \
 		build-essential \
 		ca-certificates \
 		curl \
+		devscripts \
 		fakeroot \
 		git \
 		patch \
+		procps \
+		psmisc \
 		publicsuffix \
 		puppet-lint \
 		shunit2 \
