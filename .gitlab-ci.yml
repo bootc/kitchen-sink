@@ -1,6 +1,7 @@
 ---
 stages:
   - build
+  - git-sync
 
 buster:
   stage: build
@@ -19,7 +20,23 @@ buster:
       -t quay.io/${CI_PROJECT_PATH}:${DEB_SUITE}
       .
     - docker push quay.io/${CI_PROJECT_PATH}:${DEB_SUITE}
+  only:
+    - master
+  except:
+    - triggers
   tags:
     - docker-build
+
+git-sync:
+  script:
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
+    - git sync-remote
+        git@github.com:${CI_PROJECT_PATH}.git
+        git@git.boo.tc:${CI_PROJECT_PATH}.git
+  stage: git-sync
+  image: dkr.boo.tc/bootc/github-gitlab-sync:latest
+  only:
+    - triggers
 
 # vim: ai ts=2 sw=2 et sts=2 ft=yaml
