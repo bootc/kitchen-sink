@@ -8,6 +8,7 @@ buster:
   variables:
     DEB_SUITE: buster
   script:
+    - export DKR_IMAGE="$(echo $CI_PROJECT_PATH | tr '[:upper:]' '[:lower:]')"
     - docker login -u="${QUAY_IO_USER}" -p="${QUAY_IO_PASSWORD}" quay.io
     - >-
       docker build
@@ -17,9 +18,9 @@ buster:
       --label=org.label-schema.vcs-ref="${CI_COMMIT_SHA}"
       --label=org.label-schema.vcs-url="${CI_PROJECT_URL}.git"
       --pull=true
-      -t quay.io/${CI_PROJECT_PATH}:${DEB_SUITE}
+      -t quay.io/${DKR_IMAGE}:${DEB_SUITE}
       .
-    - docker push quay.io/${CI_PROJECT_PATH}:${DEB_SUITE}
+    - docker push quay.io/${DKR_IMAGE}:${DEB_SUITE}
   only:
     - master
   except:
@@ -30,7 +31,7 @@ buster:
 git-sync:
   script:
     - eval $(ssh-agent -s)
-    - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
+    - echo "$SSH_PRIVATE_KEY" | base64 -d | ssh-add -
     - git sync-remote
         git@github.com:${CI_PROJECT_PATH}.git
         git@git.boo.tc:${CI_PROJECT_PATH}.git
