@@ -2,8 +2,8 @@ ARG DEB_SUITE=buster
 
 FROM debian:${DEB_SUITE}
 
-ARG KUBECTL_VERSION=1.10.1
-ARG HELM_VERSION=2.8.2
+ARG KUBECTL_VERSION=1.10.4
+ARG HELM_VERSION=2.9.1
 
 LABEL org.label-schema.vendor="Chris Boot" \
       org.label-schema.url="https://github.com/bootc/kitchen-sink" \
