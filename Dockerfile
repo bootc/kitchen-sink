@@ -16,13 +16,22 @@ RUN set -eux; apt-get update; apt-get install -y --no-install-recommends \
 		ca-certificates \
 		curl \
 		devscripts \
+		eatmydata \
 		fakeroot \
 		git \
+		git-buildpackage \
+		gnupg \
+		jenkins-debian-glue \
+		lintian \
 		patch \
+		piuparts \
+		pristine-tar \
 		procps \
 		psmisc \
 		publicsuffix \
 		puppet-lint \
+		quilt \
+		shellcheck \
 		shunit2 \
 		ssh-client \
 		wget \
