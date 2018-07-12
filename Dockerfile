@@ -2,7 +2,7 @@ ARG DEB_SUITE=buster
 
 FROM debian:${DEB_SUITE}
 
-ARG KUBECTL_VERSION=1.10.4
+ARG KUBECTL_VERSION=1.11.0
 ARG HELM_VERSION=2.9.1
 
 LABEL org.label-schema.vendor="Chris Boot" \
