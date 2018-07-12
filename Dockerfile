@@ -11,32 +11,29 @@ LABEL org.label-schema.vendor="Chris Boot" \
       org.label-schema.license="Apache-2.0" \
       org.label-schema.schema-version="1.0"
 
-RUN set -eux; apt-get update; apt-get install -y --no-install-recommends \
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y \
 		build-essential \
-		ca-certificates \
 		curl \
 		devscripts \
 		eatmydata \
-		fakeroot \
-		git \
-		git-buildpackage \
-		gnupg \
-		jenkins-debian-glue \
-		lintian \
-		patch \
 		piuparts \
 		pristine-tar \
 		procps \
-		psmisc \
-		publicsuffix \
 		puppet-lint \
 		quilt \
 		shellcheck \
 		shunit2 \
-		ssh-client \
 		wget \
 		yamllint \
-	; rm -rf /var/lib/apt/lists/\*
+	; \
+	apt-get install -y --no-install-recommends \
+		dgit \
+		git-buildpackage \
+		jenkins-debian-glue \
+	; \
+	rm -rf /var/lib/apt/lists/\*
 
 RUN set -eux; \
 	curl -sLo /usr/local/bin/kubectl \
