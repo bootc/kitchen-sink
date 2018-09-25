@@ -5,28 +5,27 @@ stages:
 
 buster:
   stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   variables:
     DEB_SUITE: buster
   script:
     - export DKR_IMAGE="$(echo $CI_PROJECT_PATH | tr '[:upper:]' '[:lower:]')"
-    - docker login -u="${QUAY_IO_USER}" -p="${QUAY_IO_PASSWORD}" quay.io
+    - mkdir -p /root/.docker
+    - echo "{\"auths\":{\"v1.quay.io\":{\"auth\":\"${QUAY_IO_AUTH}\"}}}" > /root/.docker/config.json
     - >-
-      docker build
+      /kaniko/executor
+      --context $CI_PROJECT_DIR
+      --dockerfile $CI_PROJECT_DIR/Dockerfile
       --build-arg=DEB_SUITE=${DEB_SUITE}
-      --force-rm=true
-      --label=org.label-schema.build-date="$(date --utc --iso-8601=seconds)"
-      --label=org.label-schema.vcs-ref="${CI_COMMIT_SHA}"
-      --label=org.label-schema.vcs-url="${CI_PROJECT_URL}.git"
-      --pull=true
-      -t quay.io/${DKR_IMAGE}:${DEB_SUITE}
-      .
-    - docker push quay.io/${DKR_IMAGE}:${DEB_SUITE}
+      --build-arg=BUILD_DATE="$(date --utc +%Y-%m-%dT%H:%M:%SZ)"
+      --build-arg=VCS_REF=${CI_COMMIT_SHA}
+      --destination v1.quay.io/${DKR_IMAGE}:${DEB_SUITE}
   only:
     - master
   except:
     - triggers
-  tags:
-    - docker-build
 
 git-sync:
   script:

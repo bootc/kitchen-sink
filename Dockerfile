@@ -5,11 +5,17 @@ FROM debian:${DEB_SUITE}
 ARG KUBECTL_VERSION=1.11.3
 ARG HELM_VERSION=2.11.0
 
+ARG BUILD_DATE=1970-01-01T00:00:00Z
+ARG VCS_REF=
+
 LABEL org.label-schema.vendor="Chris Boot" \
       org.label-schema.url="https://github.com/bootc/kitchen-sink" \
       org.label-schema.name="Debian development Kitchen Sink container image" \
       org.label-schema.license="Apache-2.0" \
-      org.label-schema.schema-version="1.0"
+      org.label-schema.schema-version="1.0" \
+      org.label-schema.build-date="${BUILD_DATE}" \
+      org.label-schema.vcs-ref="${VCS_REF}" \
+      org.label-schema.vcs-url="https://git.boo.tc/bootc/kitchen-sink.git"
 
 RUN set -eux; \
 	apt-get update; \
