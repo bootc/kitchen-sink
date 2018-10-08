@@ -2,13 +2,39 @@
 
 This image is based on the standard `debian` image, with the following added:
 
-- System utilities (`procps`, `psmisc`)
-- General build tools (`git`, `patch`)
-- Debian build tools (`build-essential`, `devscripts`, `fakeroot`)
-- Networking clients (`curl`, `wget`, `ssh-client`, `ca-certificates`,
-  `publicsuffix`)
-- Linting and testing tools (`puppet-lint`, `shunit2`, `yamllint`)
-- Kubernetes clients (`kubectl`, `helm`)
+- System utilities:
+  - `eatmydata`
+  - `procps`
+  - `psmisc`
+- General build tools:
+  - `git`
+  - `patch`
+  - `pristine-tar`
+  - `quilt`
+- Debian build / packaging tools:
+  - `build-essential`
+  - `devscripts`
+  - `dgit`
+  - `fakeroot`
+  - `git-buildpackage`
+  - `jenkins-debian-glue`
+  - `piuparts`
+- Networking clients:
+  - `ca-certificates`
+  - `curl`
+  - `publicsuffix`
+  - `ssh-client`
+  - `wget`
+- Linting and testing tools:
+  - `puppet-lint`
+  - `shellcheck`
+  - `shunit2`
+  - `yamllint`
+- Kubernetes clients:
+  - `helm`
+  - `kubectl`
+- Cloud clients:
+  - `awscli`
 
 ## License
 
