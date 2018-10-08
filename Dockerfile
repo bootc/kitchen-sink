@@ -30,7 +30,6 @@ RUN set -eux; \
 		procps \
 		puppet-lint \
 		quilt \
-		s3cmd \
 		shellcheck \
 		shunit2 \
 		wget \
