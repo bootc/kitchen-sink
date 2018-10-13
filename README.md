@@ -34,7 +34,6 @@ This image is based on the standard `debian` image, with the following added:
   - `helm`
   - `kubectl`
 - Cloud clients:
-  - `awscli`
   - `mc` (Minio client)
 
 ## License
