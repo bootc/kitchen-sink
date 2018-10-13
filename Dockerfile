@@ -54,3 +54,9 @@ RUN set -eux; \
 	tar xzf helm.tar.gz --strip-components=1 linux-amd64/helm; rm helm.tar.gz; \
 	mv helm /usr/local/bin/helm; \
 	helm version --client
+
+RUN set -eux; \
+	curl -sLo /usr/local/bin/mc \
+	"https://dl.minio.io/client/mc/release/linux-amd64/mc"; \
+	chmod +x /usr/local/bin/mc; \
+	mc version
