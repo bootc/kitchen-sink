@@ -18,6 +18,7 @@ buster:
       /kaniko/executor
       --context $CI_PROJECT_DIR
       --dockerfile $CI_PROJECT_DIR/Dockerfile
+      --reproducible
       --build-arg=DEB_SUITE=${DEB_SUITE}
       --build-arg=BUILD_DATE="$(date --utc +%Y-%m-%dT%H:%M:%SZ)"
       --build-arg=VCS_REF=${CI_COMMIT_SHA}
@@ -35,7 +36,7 @@ git-sync:
         git@github.com:${CI_PROJECT_PATH}.git
         git@git.boo.tc:${CI_PROJECT_PATH}.git
   stage: git-sync
-  image: quay.io/bootc/github-gitlab-sync:latest
+  image: dkr.boo.tc/bootc/github-gitlab-sync:latest
   only:
     - triggers
 
