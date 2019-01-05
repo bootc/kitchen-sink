@@ -39,7 +39,7 @@ This image is based on the standard `debian` image, with the following added:
 
 ## License
 
-Copyright (C) 2018  Chris Boot <bootc@bootc.net>
+Copyright (C) 2018-2019  Chris Boot <bootc@bootc.net>
 
 This project is licensed under the Apache License version 2.0. That is, the
 `Dockerfile` and supporting materials in this Git repository are covered by the
