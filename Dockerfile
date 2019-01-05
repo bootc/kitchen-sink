@@ -20,6 +20,7 @@ LABEL org.label-schema.vendor="Chris Boot" \
 RUN set -eux; \
 	apt-get update; \
 	apt-get install -y \
+		awscli \
 		build-essential \
 		curl \
 		devscripts \
