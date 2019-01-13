@@ -31,7 +31,6 @@ buster:
       /kaniko/executor
       --context $CI_PROJECT_DIR
       --dockerfile $CI_PROJECT_DIR/Dockerfile
-      --reproducible
       --build-arg=DEB_SUITE=${DEB_SUITE}
       --build-arg=BUILD_DATE="$(date --utc +%Y-%m-%dT%H:%M:%SZ)"
       --build-arg=VCS_REF=${CI_COMMIT_SHA}
