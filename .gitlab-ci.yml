@@ -12,8 +12,17 @@ buster:
     DEB_SUITE: buster
   script:
     - export DKR_IMAGE="$(echo $CI_PROJECT_PATH | tr '[:upper:]' '[:lower:]')"
-    - mkdir -p /root/.docker
-    - echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"auth\":\"${DOCKER_HUB_AUTH}\"}}}" > /root/.docker/config.json
+    - \[ -z "$DOCKER_CONFIG" ] && export DOCKER_CONFIG=/kaniko/.docker
+    - |
+      cat > "${DOCKER_CONFIG}/config.json" <<EOF
+      {
+        "auths": {
+          "https://index.docker.io/v1/": {
+            "auth": "${DOCKER_HUB_AUTH}"
+          }
+        }
+      }
+      EOF
     - >-
       /kaniko/executor
       --context $CI_PROJECT_DIR
