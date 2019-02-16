@@ -19,10 +19,6 @@ buster:
         "auths": {
           "https://index.docker.io/v1/": {
             "auth": "${DOCKER_HUB_AUTH}"
-          },
-          "${CI_REGISTRY}": {
-            "username": "${CI_REGISTRY_USER}",
-            "password": "${CI_REGISTRY_PASSWORD}"
           }
         }
       }
@@ -34,7 +30,6 @@ buster:
       --build-arg=DEB_SUITE=${DEB_SUITE}
       --build-arg=BUILD_DATE="$(date --utc +%Y-%m-%dT%H:%M:%SZ)"
       --build-arg=VCS_REF=${CI_COMMIT_SHA}
-      --destination "${CI_REGISTRY_IMAGE}:${DEB_SUITE}"
       --destination "${DKR_IMAGE}:${DEB_SUITE}"
   only:
     - master
