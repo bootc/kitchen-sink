@@ -1,5 +1,17 @@
 # Debian development Kitchen Sink container image
 
+<span style="color:red">This image and its Git repository are deprecated.</span>
+Please switch to something else. I will no longer update this repository. See
+below for alternatives that I'm using (some of which I maintain).
+
+## Alternatives
+
+- [tigercomputing/cloud-tools](https://hub.docker.com/r/tigercomputing/cloud-tools)
+- [tigercomputing/puppet-lint](https://hub.docker.com/r/tigercomputing/puppet-lint)
+- [pipelinecomponents/yamllint](https://hub.docker.com/r/pipelinecomponents/yamllint)
+
+## Contents
+
 This image is based on the standard `debian` image, with the following added:
 
 - System utilities:
